@@ -6,6 +6,36 @@ The procedure detailed below was developed as a means to measure how efficiently
 - Steven Pelley's atomic-memory-trace PIN-tool, found [here](https://github.com/stevenpelley/atomic-memory-trace)
 - Dr. Jan Elder and Mark D. Hill's DineroIV Cache Simulator, found [here](http://pages.cs.wisc.edu/~markhill/DineroIV/)
 
-In addition to the three programs above, two other programs are also included in this project. The first is a utility program called 'reformat', and the other is a sample program called 'vectorSearch' used to test the functionality of the system.
+In addition to the three programs above, two other programs are also included in this project. The first is a utility program called 'reformat', which is used to translate data between different tools. The other is a sample program called 'vectorSearch' which creates a vector of 100,000 long-longs and performs a sequential search and a random-access search. The code within 'vectorSearch is able to be changed if the user so desires.
 
 This README documents the steps necessary to use each program correctly to generate the correct results. The three pre-existng programs listed above each come with their own documentation, so please refer to those if a problem arises from them. This system was developed on Ubuntu 14.04, and is unable to be used outside of Linux operating systems. No support outside of the contained documentation is available but this system is shared with the hope of being of use to other people running similar projects.
+
+# Getting Started
+To begin, download the five necessary programs and build them accordingly. 'vectorSearch' and 'reformat' are both C++ files and should be built using C++11. To keep things simple, it is recommended that everything involved in the system is contained in a single overarching directory. This README assumes that the directories for each of the programs is stored in a directory called 'tools'. The executables for 'reformat' and 'vectorSearch' should both reside directly within this directory.
+
+# Generating a Trace File
+Now that everything is built, the next step is generating a Trace File for a program. As an example, vectorSearch will be the program used for analysis. While in the 'tools' directory, input the following command into the terminal:
+```
+$ ./(pin) -t ./(atomic-memory-trace)/trace/obj-intel64/trace.so -f function_list -- ./(Tested Program)
+```
+Where (pin) is the location of the file 'pin.sh', (atomic-memory-trace) is the name of the directory where the similarly named PIN-tool is located, function_list is a text file with the name of a specific function for the PIN-tool to watch for (see below), and (Tested Program) is the program being tested.
+
+'-f function_list' allows the PIN-tool to make note of when a specific function is called in the tested program. It is assumed that the user running this system wants to trace a specific function call. If this is not the case, 'reformat' needs to be revised, as, in its default state, it automatically ignores all traces from outside of the targeted functions. The list of functions within this text file should be formatted as follows:
+```
+class_name::method_name
+```
+or
+```
+function_name
+```
+For this example, the function in vectorSearch which performs the sequential search is what will be targeted while traced. As such, the function_list will look like this:
+```
+seq_search
+```
+After plugging in all of the appropriate information, the terminal command may look like this:
+```
+$ ./pin/pin.sh -t ./amt/trace/obj-intel64/trace.so -f function_list -- ./vectorSearch
+```
+After entering this command, it may take the machine several minutes to complete the tracing process, depending on how complex the program is. Additionally, it should be warned that the resulting trace files can end up being very large. It is not uncommon for them to be upwards of several Gigabytes in size. Before running this command, please ensure that your machine has enough extra memory to contain this file.
+
+Once completed, there should now be a new trace file in the 'tools' directory called 'memory_trace.out'. It is recommended that you do **NOT** attempt to open this file. Depending on how large the trace file is, attemping to open it may cause your computer to crash.
