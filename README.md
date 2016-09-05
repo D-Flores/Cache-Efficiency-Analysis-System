@@ -71,3 +71,5 @@ Using sample values for the sizes of each cache, the terminal command could look
 ~tools/DineroIV$ ./dineroIV -l1-isize 32k -l1-dsize 32k -l1-ibsize 64 -l1-dbsize 64 -informat d <memort_trace.reform >tex.rpt
 ```
 After running this command, there should now be a new file called 'tex.rpt' located within the DineroIV directory which contains detailed results about the program's cache efficiency. The results are now yours to do with whatever you please.
+
+![My image](C:\Users\David\Pictures\Cache-Report.png)
