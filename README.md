@@ -70,4 +70,8 @@ Using sample values for the sizes of each cache, the terminal command could look
 ```
 ~tools/DineroIV$ ./dineroIV -l1-isize 32k -l1-dsize 32k -l1-ibsize 64 -l1-dbsize 64 -informat d <memort_trace.reform >tex.rpt
 ```
-After running this command, there should now be a new file called 'tex.rpt' located within the DineroIV directory which contains detailed results about the program's cache efficiency. The results are now yours to do with whatever you please.
+After running this command, there should now be a new file called 'tex.rpt' located within the DineroIV directory which contains detailed results about the program's cache efficiency. A sample results file based on the 'seq_search' function from the included 'vectorSearch' program can be seen below, where 100,002 of the 200,004 accesses to the cache missed, resulting in a miss rate of 50%.
+
+![My image](http://i.imgur.com/qFJEKXgh.png)
+
+ The results are now yours to do with whatever you please.
