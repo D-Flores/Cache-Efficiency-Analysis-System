@@ -72,4 +72,4 @@ Using sample values for the sizes of each cache, the terminal command could look
 ```
 After running this command, there should now be a new file called 'tex.rpt' located within the DineroIV directory which contains detailed results about the program's cache efficiency. The results are now yours to do with whatever you please.
 
-![My image](\Users\David\Pictures\Cache-Report.png)
+![My image](http://i.imgur.com/qFJEKXgh.png)
